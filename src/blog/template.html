@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - My Blog</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/blog.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+    
+    <main class="blog-post">
+        <article>
+            <header>
+                <h1>{{title}}</h1>
+                <div class="post-meta">
+                    <time datetime="{{date}}">{{dateFormatted}}</time>
+                    <span class="author">by {{author}}</span>
+                </div>
+            </header>
+            
+            <div class="post-content">
+                {{content}}
+            </div>
+        </article>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 My Blog</p>
+    </footer>
+</body>
+</html> 
