@@ -1,5 +1,6 @@
 ---
 title: About Us
+template: layout.html
 ---
 
 # About Us

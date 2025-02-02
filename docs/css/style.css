@@ -1,0 +1,78 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navigation */
+nav {
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+nav a {
+    margin-right: 1rem;
+    text-decoration: none;
+    color: #333;
+}
+
+nav a:hover {
+    color: #0066cc;
+}
+
+/* Typography */
+h1, h2, h3 {
+    margin: 1.5rem 0 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* Footer */
+footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #666;
+}
+
+/* Add to your existing CSS */
+.blog-list {
+    margin: 2rem 0;
+}
+
+.blog-preview {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.blog-preview h2 {
+    margin-bottom: 0.5rem;
+}
+
+.blog-preview h2 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.blog-preview h2 a:hover {
+    color: #0066cc;
+}
+
+.blog-preview time {
+    color: #666;
+    font-size: 0.9rem;
+} 

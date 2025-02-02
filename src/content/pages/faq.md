@@ -1,5 +1,6 @@
 ---
 title: FAQ
+template: layout.html
 ---
 
 # Frequently Asked Questions
