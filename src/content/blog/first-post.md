@@ -1,23 +1,13 @@
 ---
-title: Getting Started with Static Sites
+title: First Blog Post
 date: 2024-01-01
 template: base.html
 ---
 
-# Getting Started with Static Sites
+# My First Blog Post
 
-Static sites are making a comeback, and for good reason. They're:
-- Fast
-- Secure
-- Easy to maintain
-- Great for SEO
+Welcome to my first blog post! This is a sample post to test our markdown conversion system.
 
-## Why This Approach?
+## Why I Started This Blog
 
-We're using a simple architecture with just the essentials:
-1. Markdown for content
-2. HTML templates
-3. Basic CSS
-4. Node.js for building
-
-No complex frameworks, no overhead - just clean, efficient code. 
+I wanted to create a simple, fast website using basic web technologies. No frameworks, no complexity - just HTML, CSS, and JavaScript. 

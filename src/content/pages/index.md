@@ -3,9 +3,9 @@ title: Welcome
 template: base.html
 ---
 
-# Welcome to My Site
+# Welcome to My Static Site
 
-This is a static site built with modern web technologies.
+A simple static site generator that converts Markdown files into HTML pages.
 
 ## Latest Posts
 
