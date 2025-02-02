@@ -204,4 +204,10 @@ if (fs.existsSync(homepagePath)) {
 const faviconContent = Buffer.from('0000010001001010000001002000680400001600000028000000100000002000000001002000000000000004000000000000000000000000000000000000000000', 'hex');
 fs.writeFileSync(path.join(DIST_DIR, 'favicon.ico'), faviconContent);
 
+// Add to your copyDir operations
+copyDir(
+    path.join(SRC_DIR, 'images'),
+    path.join(DIST_DIR, 'images')
+);
+
 console.log('Build complete!'); 
