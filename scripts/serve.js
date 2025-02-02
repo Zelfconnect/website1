@@ -1,49 +1,58 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
 const path = require('path');
+const { exec } = require('child_process');
+const fs = require('fs');
 
-// Configuration
-const PORT = 3002;
-const DIST_DIR = path.join(__dirname, '../dist');
-const SRC_DIR = path.join(__dirname, '../src');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Basic MIME types for different file extensions
-const MIME_TYPES = {
-    '.html': 'text/html',
-    '.css': 'text/css',
-    '.js': 'text/javascript',
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.md': 'text/markdown'
-};
+// Serve static files from the docs directory
+app.use(express.static(path.join(__dirname, '../docs')));
 
-// Create basic server
-const server = http.createServer((req, res) => {
-    console.log('Received request for:', req.url);
-    
-    // Default to index.html for root path
-    const filePath = path.join(DIST_DIR, 
-        req.url === '/' ? 'index.html' : req.url);
-    
-    const ext = path.extname(filePath);
-    const contentType = MIME_TYPES[ext] || 'text/plain';
-    
-    // Simple file serving
-    fs.readFile(filePath, (err, content) => {
-        if (err) {
-            console.error('Error serving file:', err);
-            res.writeHead(404);
-            res.end('Not found');
-            return;
+// Handle all routes
+app.get('*', (req, res) => {
+    // Remove leading slash and add .html
+    const page = req.path === '/' ? 'index.html' : `${req.path.slice(1)}.html`;
+    const filePath = path.join(__dirname, '../docs', page);
+
+    // Check if file exists
+    if (fs.existsSync(filePath)) {
+        res.sendFile(filePath);
+    } else {
+        // If file doesn't exist, try serving index.html from that directory
+        const indexPath = path.join(__dirname, '../docs', req.path.slice(1), 'index.html');
+        if (fs.existsSync(indexPath)) {
+            res.sendFile(indexPath);
+        } else {
+            res.status(404).sendFile(path.join(__dirname, '../docs/404.html'));
         }
-
-        res.writeHead(200, { 'Content-Type': contentType });
-        res.end(content);
-    });
+    }
 });
 
+// Watch for file changes
+function watchFiles() {
+    console.log('Watching for file changes...');
+    exec('node scripts/build.js', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error: ${error}`);
+            return;
+        }
+        console.log(`Build output: ${stdout}`);
+    });
+}
+
+// Initial build
+watchFiles();
+
 // Start server
-server.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
-    console.log(`Serving files from: ${DIST_DIR}`);
+    console.log('Press Ctrl+C to stop');
+}).on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+        console.log(`Port ${PORT} is busy, trying ${PORT + 1}`);
+        app.listen(PORT + 1);
+    } else {
+        console.error(err);
+    }
 }); 
