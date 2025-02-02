@@ -1,12 +1,12 @@
 ---
-title: Welcome to Zelfconnect
+title: Zelfconnect
 template: base.html
 ---
 
 <div class="hero">
     <div class="hero-content">
-        <h1>Enhance Your Cognitive Potential</h1>
-        <p class="hero-text">Discover structured pathways to personal growth through science-based cognitive enhancement techniques.</p>
+        <h1>Zelfconnect</h1>
+        <p class="hero-text">Empowering cognitive enhancement through structured learning and personal growth.</p>
         <div class="cta-buttons">
             <a href="/website1/courses" class="button primary">Explore Courses</a>
             <a href="/website1/about" class="button secondary">Learn More</a>
@@ -24,17 +24,17 @@ template: base.html
         <div class="feature-card">
             <div class="feature-icon">🧠</div>
             <h3>Scientific Foundation</h3>
-            <p>Evidence-based methodologies for cognitive enhancement and personal development.</p>
+            <p>Evidence-based methodologies for cognitive enhancement.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🎯</div>
             <h3>Structured Growth</h3>
-            <p>Clear pathways and progressive learning experiences tailored to your goals.</p>
+            <p>Clear pathways and progressive learning experiences.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🔄</div>
             <h3>Continuous Progress</h3>
-            <p>Track your development with measurable outcomes and adaptive learning paths.</p>
+            <p>Track your development with measurable outcomes.</p>
         </div>
     </div>
 </section>
