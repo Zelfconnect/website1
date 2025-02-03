@@ -210,4 +210,10 @@ copyDir(
     path.join(DIST_DIR, 'images')
 );
 
+// Add this to your build.js file
+fs.copyFileSync(
+    path.join(SRC_DIR, 'index.html'),
+    path.join(DIST_DIR, 'index.html')
+);
+
 console.log('Build complete!'); 
