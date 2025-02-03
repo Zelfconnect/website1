@@ -7,6 +7,17 @@ const frontMatter = require('front-matter');
 const SRC_DIR = path.join(__dirname, '../src');
 const DIST_DIR = path.join(__dirname, '../docs');  // Changed from dist to docs
 
+// Clean and create dist directory
+if (fs.existsSync(DIST_DIR)) {
+    fs.rmSync(DIST_DIR, { recursive: true });
+}
+fs.mkdirSync(DIST_DIR);
+
+// Create necessary directories
+fs.mkdirSync(path.join(DIST_DIR, 'css'));
+fs.mkdirSync(path.join(DIST_DIR, 'images'));
+fs.mkdirSync(path.join(DIST_DIR, 'js'));
+
 // Create directory structure
 const dirs = [
     'docs',  // Changed from dist to docs
@@ -149,11 +160,38 @@ function generateBlogIndex() {
 // Build site
 console.log('Building site...');
 
+// Copy HTML files
+fs.readdirSync(SRC_DIR).forEach(file => {
+    if (file.endsWith('.html')) {
+        fs.copyFileSync(
+            path.join(SRC_DIR, file),
+            path.join(DIST_DIR, file)
+        );
+    }
+});
+
 // Copy CSS
-copyDir(
-    path.join(SRC_DIR, 'css'),
-    path.join(DIST_DIR, 'css')
+fs.copyFileSync(
+    path.join(SRC_DIR, 'css', 'style.css'),
+    path.join(DIST_DIR, 'css', 'style.css')
 );
+
+// Copy JS
+fs.copyFileSync(
+    path.join(SRC_DIR, 'js', 'main.js'),
+    path.join(DIST_DIR, 'js', 'main.js')
+);
+
+// Copy images
+const imagesDir = path.join(SRC_DIR, 'images');
+if (fs.existsSync(imagesDir)) {
+    fs.readdirSync(imagesDir).forEach(file => {
+        fs.copyFileSync(
+            path.join(imagesDir, file),
+            path.join(DIST_DIR, 'images', file)
+        );
+    });
+}
 
 // Process pages
 console.log('\nProcessing pages...');
@@ -216,4 +254,4 @@ fs.copyFileSync(
     path.join(DIST_DIR, 'index.html')
 );
 
-console.log('Build complete!'); 
+console.log('Build completed!'); 

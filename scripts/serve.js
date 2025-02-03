@@ -4,7 +4,22 @@ const { exec } = require('child_process');
 const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+let PORT = 4000; // Changed to port 4000
+
+// Function to try different ports
+function startServer(port) {
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}`);
+        console.log('Press Ctrl+C to stop');
+    }).on('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+            console.log(`Port ${port} is busy, trying ${port + 1}`);
+            startServer(port + 1);
+        } else {
+            console.error(err);
+        }
+    });
+}
 
 // Serve static files from the docs directory
 app.use(express.static(path.join(__dirname, '../docs')));
@@ -44,15 +59,5 @@ function watchFiles() {
 // Initial build
 watchFiles();
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-    console.log('Press Ctrl+C to stop');
-}).on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-        console.log(`Port ${PORT} is busy, trying ${PORT + 1}`);
-        app.listen(PORT + 1);
-    } else {
-        console.error(err);
-    }
-}); 
+// Start server with port finding
+startServer(PORT); 
